@@ -1,0 +1,67 @@
+/* Modal overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+  }
+  
+  /* Modal container */
+  .modal-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); */
+    max-width: 400px;
+    width: 100%;
+  }
+  
+
+  /* Modal content */
+  .modal-content {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  
+  /* Modal buttons */
+  .modal-buttons {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Confirm button */
+  .confirm-button {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  /* Cancel button */
+  .cancel-button {
+    background-color: #f00;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .modal-head{
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: calc(0.3rem - 1px);
+    text-align: center;
+    border-top-right-radius: calc(0.3rem - 1px);
+    color: red;
+    font-size: x-large;
+  }

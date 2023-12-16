@@ -1,12 +1,33 @@
-import React from 'react';
-
+import React,{useContext,useState} from 'react';
 import './Header.css';
 import OlxLogo from '../../assets/OlxLogo';
 import Search from '../../assets/Search';
 import Arrow from '../../assets/Arrow';
 import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
+import { useNavigate } from 'react-router';
+import {signOut} from 'firebase/auth'
+import {auth} from '../../firebase/config'
+import {authContext} from '../../store/Context'
+import { Link } from 'react-router-dom';
+import ConfirmationModal from '../../model/logoutModel';
+
+
 function Header() {
+  const {user}= useContext(authContext)
+  const navigate = useNavigate()
+  const [showConfirmationModal,setShowConfirmationModal]=useState(false);
+
+  const toggleConfirmationModal = () => {
+    setShowConfirmationModal(!showConfirmationModal);
+  };
+
+  const handleLogout = () => {
+    signOut(auth).then(()=>{
+      setShowConfirmationModal(false);
+      navigate('/login');
+    })
+  }
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
@@ -34,15 +55,25 @@ function Header() {
           <Arrow></Arrow>
         </div>
         <div className="loginPage">
-          <span>Login</span>
+          <span>{user?`${user.displayName}`:<Link to={'/login'}>Login</Link>}</span>
           <hr />
         </div>
 
-        <div className="sellMenu">
+        {user&&  <span className='logout' onClick={toggleConfirmationModal}>Logout</span>}
+
+        {showConfirmationModal && (
+        <div className="modal-overlay">
+          <div className="modal-container">
+            <ConfirmationModal onConfirm={handleLogout} onCancel={toggleConfirmationModal} />
+          </div>
+        </div>
+      )}
+
+        <div className="sellMenu" onClick={()=>(user?navigate('/create'):navigate('/login'))}>
           <SellButton></SellButton>
           <div className="sellMenuContent">
             <SellButtonPlus></SellButtonPlus>
-            <span>SELL</span>
+            <span> SELL</span>
           </div>
         </div>
       </div>
